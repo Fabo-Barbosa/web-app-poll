@@ -1,3 +1,7 @@
+# Arquivos bootstrap
+public/css/
+public/js/
+
 # Logs
 logs
 *.log
