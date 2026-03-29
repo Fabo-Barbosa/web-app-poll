@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const app = express();
 const path = require('path');
 const admin = require('./routes/admin');
+const user = require('./routes/user');
 const session = require('express-session');
 const flash = require('connect-flash');
 require('./models/Poll');
@@ -45,7 +46,11 @@ const db = require("./config/db");
         app.use(express.static(path.join(__dirname, "public")))
 
 // Routes
+    app.get('/', (req, res) => {
+        res.render("index")
+    })
     app.use("/admin", admin);
+    app.use("/user", user);
 
 // Outros 
 const PORT = process.env.PORT || 5432;
