@@ -8,10 +8,12 @@ const admin = require('./routes/admin');
 const user = require('./routes/user');
 const session = require('express-session');
 const flash = require('connect-flash');
+const Passport = require('passport');
 require('./models/Poll');
 const Poll = mongoose.model('poll');
 require('./models/Topic');
 const Topic = mongoose.model('topic');
+require('./config/auth')(Passport);
 const db = require("./config/db");
 
 // Config
@@ -21,6 +23,8 @@ const db = require("./config/db");
             resave: true,
             saveUninitialized: true
         }));
+        app.use(Passport.initialize());
+        app.use(Passport.session())
         app.use(flash());
     // Middleware
         app.use((req, res, next) => {
